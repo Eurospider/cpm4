@@ -1,0 +1,888 @@
+{
+  "key": "complete",
+  "collectionNames": [
+    "c_main"
+  ],
+  "riskCategoriesDefinition": [
+    {
+      "key": "a",
+      "priority": 100,
+      "label": "A",
+      "description": "Indications of high risk",
+      "forNoMatches": false
+    },
+    {
+      "key": "b",
+      "priority": 200,
+      "label": "B",
+      "description": "Indications of increased risk",
+      "forNoMatches": false
+    },
+    {
+      "key": "d",
+      "priority": 300,
+      "label": "D",
+      "description": "Further information of possible relevance",
+      "forNoMatches": false
+    },
+    {
+      "key": "i",
+      "priority": 400,
+      "label": "I",
+      "description": "No information available",
+      "forNoMatches": false
+    },
+    {
+      "key": "c",
+      "priority": 500,
+      "label": "C",
+      "description": "No indications (no or minimal risk)",
+      "forNoMatches": true
+    },
+    {
+      "key": "?",
+      "priority": 600,
+      "label": "?",
+      "description": "Not set",
+      "forNoMatches": false
+    }
+  ],
+  "riskCriteriaDefinition": [
+    {
+      "path": "root",
+      "key": "root",
+      "label": "Overall risk",
+      "description": "Overall risk",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/sanction",
+      "key": "sanction",
+      "label": "Sanction",
+      "description": "Sanction",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/sanction/seco",
+      "key": "seco",
+      "label": "SECO",
+      "description": "SECO",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/sanction/eu",
+      "key": "eu",
+      "label": "EU",
+      "description": "EU",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/sanction/ofac",
+      "key": "ofac",
+      "label": "OFAC",
+      "description": "OFAC",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/sanction/others",
+      "key": "others",
+      "label": "Others",
+      "description": "Others",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/pep",
+      "key": "pep",
+      "label": "PEP",
+      "description": "PEP",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/pep/pep",
+      "key": "pep",
+      "label": "PEP",
+      "description": "PEP",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/pep/ch-pep",
+      "key": "ch-pep",
+      "label": "CH-PEP",
+      "description": "CH-PEP",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/pep/int-pep",
+      "key": "int-pep",
+      "label": "INT-PEP",
+      "description": "INT-PEP",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/pep/rca-pep",
+      "key": "rca-pep",
+      "label": "RCA-PEP",
+      "description": "RCA-PEP",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/crime",
+      "key": "crime",
+      "label": "Crime",
+      "description": "Crime",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/crime/wanted",
+      "key": "wanted",
+      "label": null,
+      "description": "Wanted",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/crime/others",
+      "key": "others",
+      "label": null,
+      "description": "Others",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/further",
+      "key": "further",
+      "label": "Further compliance relvant risks",
+      "description": "Further compliance relant risks",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/further/ctrl-org",
+      "key": "ctrl-org",
+      "label": "CTRL-ORG",
+      "description": "CTRL-ORG",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/further/country",
+      "key": "country",
+      "label": "Country risk",
+      "description": "Country risk",
+      "initialCategoryKey": "c"
+    },
+    {
+      "path": "root/further/sector-risk",
+      "key": "sector-risk",
+      "label": "Sector risk",
+      "description": "Sector risk",
+      "initialCategoryKey": "c"
+    }
+  ],
+  "matchDefinition": {
+    "criterionKey": "root",
+    "triggers": [
+      {
+        "categoryKey": null,
+        "expression": {
+          "value": "OR",
+          "children": [
+            {
+              "type": "TAG",
+              "value": "record:type:country"
+            },
+            {
+              "value": "AND",
+              "children": [
+                {
+                  "type": "TAG",
+                  "value": "record:type:person"
+                },
+                {
+                  "value": "OR",
+                  "children": [
+                    {
+                      "type": "TAG",
+                      "value": "match:dob"
+                    },
+                    {
+                      "value": "AND",
+                      "children": [
+                        {
+                          "value": "OR",
+                          "children": [
+                            {
+                              "value": "NOT",
+                              "children": [
+                                {
+                                  "type": "TAG",
+                                  "value": "record:has-year-of-birth"
+                                }
+                              ]
+                            },
+                            {
+                              "value": "NOT",
+                              "children": [
+                                {
+                                  "type": "TAG",
+                                  "value": "customer:has-year-of-birth"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "TAG",
+                              "value": "match:year-of-birth:fuzzy"
+                            }
+                          ]
+                        },
+                        {
+                          "value": "OR",
+                          "children": [
+                            {
+                              "value": "OR",
+                              "children": [
+                                {
+                                  "value": "NOT",
+                                  "children": [
+                                    {
+                                      "type": "TAG",
+                                      "value": "record:has-citizenship"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "value": "NOT",
+                                  "children": [
+                                    {
+                                      "type": "TAG",
+                                      "value": "customer:has-citizenship"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "TAG",
+                                  "value": "match:citizenship"
+                                }
+                              ]
+                            },
+                            {
+                              "value": "OR",
+                              "children": [
+                                {
+                                  "value": "NOT",
+                                  "children": [
+                                    {
+                                      "type": "TAG",
+                                      "value": "record:has-country-of-residence"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "value": "NOT",
+                                  "children": [
+                                    {
+                                      "type": "TAG",
+                                      "value": "customer:has-country-of-residence"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "TAG",
+                                  "value": "match:country-of-residence"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "AND",
+              "children": [
+                {
+                  "type": "TAG",
+                  "value": "record:type:organisation"
+                },
+                {
+                  "value": "OR",
+                  "children": [
+                    {
+                      "value": "NOT",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:has-country"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "NOT",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "customer:has-country"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "TAG",
+                      "value": "match:country"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "children": [
+      {
+        "criterionKey": "sanction",
+        "triggers": [],
+        "children": [
+          {
+            "criterionKey": "seco",
+            "triggers": [
+              {
+                "categoryKey": "a",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:seco"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:bush"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "eu",
+            "triggers": [
+              {
+                "categoryKey": "a",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "type": "TAG",
+                      "value": "record:collection:sanction:eu"
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "ofac",
+            "triggers": [
+              {
+                "categoryKey": "a",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "type": "TAG",
+                      "value": "record:collection:sanction:ofac"
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "others",
+            "triggers": [
+              {
+                "categoryKey": "a",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:hm-treasury"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:mas"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:hkma"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:un"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:sanction:others"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:sanction"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "criterionKey": "pep",
+        "triggers": [],
+        "children": [
+          {
+            "criterionKey": "pep",
+            "triggers": [
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:pep"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:pep"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "ch-pep",
+            "triggers": [
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:ch-pep"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:ch-pep"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "int-pep",
+            "triggers": [
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:int-pep"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:int-pep"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "rca-pep",
+            "triggers": [
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:rca-pep"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:rca-pep"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "criterionKey": "crime",
+        "triggers": [],
+        "children": [
+          {
+            "criterionKey": "wanted",
+            "triggers": [
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "type": "TAG",
+                      "value": "record:collection:crime:wanted"
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "others",
+            "triggers": [
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:crime:others"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:crime"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "criterionKey": "further",
+        "triggers": [],
+        "children": [
+          {
+            "criterionKey": "ctrl-org",
+            "triggers": [
+              {
+                "categoryKey": "d",
+                "expression": {
+                  "value": "AND",
+                  "children": [
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "record:collection:ctrl-org"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "record:build:collection:ctrl-org"
+                        }
+                      ]
+                    },
+                    {
+                      "value": "OR",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "match:name:exact"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:name:similar"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          },
+          {
+            "criterionKey": "country",
+            "triggers": [
+              {
+                "categoryKey": "a",
+                "expression": {
+                  "value": "OR",
+                  "children": [
+                    {
+                      "value": "AND",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "customer:type:person"
+                        },
+                        {
+                          "value": "OR",
+                          "children": [
+                            {
+                              "type": "TAG",
+                              "value": "match:citizenship:risk:A"
+                            },
+                            {
+                              "type": "TAG",
+                              "value": "match:country-of-residence:risk:A"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "value": "AND",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "customer:type:organisation"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:country-of-residence:risk:A"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "categoryKey": "b",
+                "expression": {
+                  "value": "OR",
+                  "children": [
+                    {
+                      "value": "AND",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "customer:type:person"
+                        },
+                        {
+                          "value": "OR",
+                          "children": [
+                            {
+                              "type": "TAG",
+                              "value": "match:citizenship:risk:B"
+                            },
+                            {
+                              "type": "TAG",
+                              "value": "match:country-of-residence:risk:B"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "value": "AND",
+                      "children": [
+                        {
+                          "type": "TAG",
+                          "value": "customer:type:organisation"
+                        },
+                        {
+                          "type": "TAG",
+                          "value": "match:country-of-residence:risk:B"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "coverageSelection": "LOWEST"
+}
