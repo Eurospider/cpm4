@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      name: search
+      labels:
+        app: search
+    spec:
+      initContainers:
+        - name: before
+          image: services.eurospider.com:5000/cpm4/on-prem-search-only/search-before:latest
+          imagePullPolicy: Always
+          env:
+            - name: GIT_CONF_EXPORT_PATH
+              value: conf/on-prem-search-only-test
+          volumeMounts:
+            - name: conf
+              mountPath: /etc/opt/ecpm
+            - name: data
+              mountPath: /var/opt/ecpm
+            - name: run
+              mountPath: /run/ecpm
+            - name: secrets
+              mountPath: /etc/opt/secrets
+              readOnly: true
+      containers:
+        - name: main
+          image: services.eurospider.com:5000/cpm4/on-prem-search-only/search-main:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: conf
+              mountPath: /etc/opt/ecpm
+              readOnly: true
+            - name: data
+              mountPath: /var/opt/ecpm
+            - name: run
+              mountPath: /run/ecpm
+          ports:
+            - name: http
+              containerPort: 7004
+          startupProbe:
+            httpGet:
+              port: http
+              path: /search/rest/status
+            failureThreshold: 12
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /search/rest/status
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command: [ "bash", "-c", "bash -c \"curl -fs http://localhost:7004/search/rest/status | grep ^ready$ > /dev/null\"" ]
+            periodSeconds: 10
+      volumes:
+        - name: data
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: cpm-k8s-test
+                resources:
+                  requests:
+                    storage: 1Gi
+        - name: conf
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: cpm-k8s-test
+                resources:
+                  requests:
+                    storage: 1Gi
+        - name: run
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: cpm-k8s-test
+                resources:
+                  requests:
+                    storage: 75Gi
+        - name: secrets
+          secret:
+            secretName: cpm4
+      imagePullSecrets:
+        - name: eurospider
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+spec:
+  type: NodePort
+  selector:
+    app: search
+  ports:
+    - name: http
+      protocol: TCP
+      port: 7004
+      targetPort: 7004
+      nodePort: 30004
