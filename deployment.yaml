@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: GIT_CONF_EXPORT_PATH
-              value: conf/on-prem-search-only-test
+              value: conf/test/on-prem-search-only
           volumeMounts:
             - name: conf
               mountPath: /etc/opt/ecpm
