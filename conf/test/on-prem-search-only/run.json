@@ -1,0 +1,84 @@
+{
+	"properties" : {
+
+		"DEBUG" : false,
+		"MODE" : "development",
+		"AUTHENTICATION" : "keycloak",
+
+		"LOGGING" : "DEVELOPMENT",
+
+		"UPDATE_BASE_URL" : "https://kyc.eurospider.com/cpm-update-pep/update-extended",
+		"UPDATE_KEY" : "ADD KEY HERE",
+		"UPDATE_SCHEDULE" : "never",
+
+		"PUBLIC_URL_SCHEME" : "http",
+		"PUBLIC_URL_HOST" : "localhost",
+		"PUBLIC_URL_PORT" : 8080,
+
+		"KEYCLOAK_DATABASE_NAME" : "keycloak",
+		"KEYCLOAK_DATABASE_USER" : "keycloak",
+
+		"SERVICE_DATABASE_NAME" : "service",
+		"SERVICE_DATABASE_USER" : "service",
+
+		"OPERATIONS_WEB_USER" : "operations",
+
+		"CHECK_PARALLELISM" : 2,
+
+		"DAILY_API_CALLS_DEFAULT" : 1000000000
+
+	},
+	"servers" : {
+		"service" : {
+			"javaOptions" : {
+				"xmx" : "2g",
+				"xms" : "1g"
+			}
+		},
+		"search" : {
+			"javaOptions" : {
+				"xmx" : "8g",
+				"xms" : "4g"
+			}
+		},
+		"handlers" : {
+			"javaOptions" : {
+				"xmx" : "1g",
+				"xms" : "512m"
+			}
+		},
+		"api" : {
+			"javaOptions" : {
+				"xmx" : "1g",
+				"xms" : "512m"
+			}
+		},
+		"coin-management" : {
+			"javaOptions" : {
+				"xmx" : "512m",
+				"xms" : "256m"
+			}
+		},
+		"toolbox" : {
+			"javaOptions" : {
+				"xmx" : "512m",
+				"xms" : "256m"
+			}
+		},
+		"admin" : {
+			"javaOptions" : {
+				"xmx" : "256m",
+				"xms" : "128m"
+			}
+		},
+		"report-generator" : {
+			"javaOptions" : {
+				"xmx" : "1g",
+				"xms" : "512m",
+				"more" : "-Dreport.instancesDirectory=/data/instances"
+			}
+		}
+	},
+	"webApps" : {
+	}
+}

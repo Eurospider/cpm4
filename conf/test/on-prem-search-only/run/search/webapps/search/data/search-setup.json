@@ -1,0 +1,26 @@
+{
+	"wordDictionary" : {
+		"wordSimilarityMinimum" : 0.8,
+		"maximumNumberOfCVCGroups" : 24,
+		"wordEditDistanceLimits" : [ 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5 ],
+		"wordSimilarityBeta" : 2.0,
+		"maximumWordLength" : 100
+	},
+	"person" : {
+		"exactCoverageMinimum" : 75,
+		"similarCoverageMinimum" : 66,
+		"exactSimilarityMinimum" : 95,
+		"similarSimilarityMinimum" : 75,
+		"exactFirstNameCoverageMinimum" : 33,
+		"similarFirstNameCoverageMinimum" : 25,
+		"exactLastNameCoverageMinimum" : 66,
+		"similarLastNameCoverageMinimum" : 33
+	},
+	"organisation" : {
+		"exactCoverageMinimum" : 80,
+		"similarCoverageMinimum" : 75,
+		"exactSimilarityMinimum" : 95,
+		"similarSimilarityMinimum" : 75,
+		"replacementLimitFactor" : 30
+	}
+}

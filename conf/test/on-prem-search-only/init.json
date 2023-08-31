@@ -1,0 +1,7 @@
+{
+	"properties" : {
+		"AUTHENTICATION_BASE_URL" : "",
+		"TIMEZONE" : "Europe/Zurich",
+		"DATABASE_MANDATOR_NAME_PREFIX" : "cpm_mandator_"
+	}
+}

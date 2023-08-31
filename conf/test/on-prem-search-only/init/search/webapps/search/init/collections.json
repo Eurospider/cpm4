@@ -1,0 +1,10 @@
+[
+	{
+		"name": "c_main",
+		"type": "NORMAL"
+	},
+	{
+		"name": "c_country",
+		"type": "COUNTRY"
+	}
+]

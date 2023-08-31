@@ -1,0 +1,10 @@
+[
+	{
+		"baseUrl": "UPDATE_BASE_URL",
+		"key": "UPDATE_KEY",
+		"schedule": "UPDATE_SCHEDULE",
+		"mode": "FULL",
+		"collectionName": "c_main",
+		"initialSchedule": "*"
+	}
+]

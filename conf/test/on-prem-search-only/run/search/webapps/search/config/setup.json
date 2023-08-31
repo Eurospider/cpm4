@@ -1,0 +1,8 @@
+{
+	"numberOfSortThreads" : 1,
+	"numberOfMergeThreads" : 1,
+	"unsortedElementsSize" : 1024000,
+	"bufferedElementsSize" : 256000,
+	"preparedSearchExpirationTimeInSeconds" : 600,
+	"maximumWaitingModificationTasks" : 10
+}

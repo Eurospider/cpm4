@@ -1,0 +1,44 @@
+{
+	"lessSimilarNGramScoreMinimum" : 500000, 
+	"maxRecallNGramScoreMinimum" : 100000,
+	"recordCollectionTagMapping" : {
+		"sanction:bush" : [ 1 ],
+		"sanction:seco" : [ 2 ],
+		"sanction:eu" : [ 3 ],
+		"sanction:hm-treasury" : [ 4 ],
+		"sanction:ofac" : [ 5 ],
+		"sanction:mas" : [ 6 ],
+		"sanction:uae" : [ 30 ],
+		"sanction:others" : [ 7 ],
+		"crime:wanted" : [ 8 ],
+		"crime:others" : [ 11 ],
+		"pep" : [ 14, 18 ],
+		"ch-pep" : [ 15, 108 ],
+		"rca-pep" : [ 26 ],
+		"sanction:hkma" : [ 27 ],
+		"sanction:un" : [ 28 ],
+		"int-pep" : [ 116 ],
+		"ctrl-org" : [ 124 ],
+		"information" : [ 15 ]
+	},
+	"recordBuildCollectionTagMapping" : {
+		"sanction" : { "id" : 4000000, "sortKey" : 1, "name" : "Blacklist", "legalCategory" : { "id" : 4000000 } },
+		"crime" : { "id" : 4000010, "sortKey" : 2, "name" : "Blacklist", "legalCategory" : { "id" : 4000010 } },
+		"pep" : { "id" : 4000020, "sortKey" : 3, "name" : "Blacklist", "legalCategory" : { "id" : 4000020 } },
+		"ch-pep" : { "id" : 4000030, "sortKey" : 4, "name" : "Blacklist", "legalCategory" : { "id" : 4000030 } },
+		"rca-pep" : { "id" : 4000040, "sortKey" : 5, "name" : "Blacklist", "legalCategory" : { "id" : 4000040 } },
+		"int-pep" : { "id" : 4000050, "sortKey" : 6, "name" : "Blacklist", "legalCategory" : { "id" : 4000050 } },
+		"ctrl-org" : { "id" : 4000060, "sortKey" : 7, "name" : "Blacklist", "legalCategory" : { "id" : 4000060 } },
+		"information" : { "id" : 4000070, "sortKey" : 8, "name" : "Blacklist", "legalCategory" : { "id" : 4000070 } }
+	},
+	"recordBuildLegalCategories" : [
+		{ "id" : 4000000, "sortKey" : 1, "name" : "Sanction" }, 
+		{ "id" : 4000010, "sortKey" : 2, "name" : "Crime" }, 
+		{ "id" : 4000020, "sortKey" : 3, "name" : "PEP" }, 
+		{ "id" : 4000030, "sortKey" : 4, "name" : "CH-PEP" }, 
+		{ "id" : 4000040, "sortKey" : 5, "name" : "RCA-PEP" }, 
+		{ "id" : 4000050, "sortKey" : 6, "name" : "INT-PEP" }, 
+		{ "id" : 4000060, "sortKey" : 7, "name" : "CTRL-ORG" }, 
+		{ "id" : 4000070, "sortKey" : 8, "name" : "Information" } 
+	]
+}
